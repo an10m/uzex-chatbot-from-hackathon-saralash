@@ -1,0 +1,30 @@
+[Unit]
+Description=UZEX AI Hackathon Telegram bot
+Wants=network-online.target
+After=network-online.target
+
+[Service]
+Type=simple
+User=uzex
+Group=uzex
+WorkingDirectory=/opt/uzex
+EnvironmentFile=/opt/uzex/.env
+Environment=PYTHONDONTWRITEBYTECODE=1
+ExecStart=/opt/uzex/.venv/bin/python -m app.bot
+Restart=always
+RestartSec=5
+TimeoutStopSec=30
+KillSignal=SIGTERM
+StandardOutput=journal
+StandardError=journal
+UMask=0077
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectSystem=full
+ProtectHome=true
+RestrictSUIDSGID=true
+LockPersonality=true
+CapabilityBoundingSet=
+
+[Install]
+WantedBy=multi-user.target
